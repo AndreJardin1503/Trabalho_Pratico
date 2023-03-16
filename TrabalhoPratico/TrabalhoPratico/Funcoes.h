@@ -7,6 +7,9 @@
  *********************************************************************/
 
 #include <stdlib.h>
+#include <stdbool.h>
+#include <stdio.h>
+#define _CRT_SECURE_NO_WARNINGS
 
 #pragma once
 
@@ -16,7 +19,7 @@
 #define size 50
 #define N 9
 
-
+#pragma region structs
 
 typedef struct MeioDeTransporte {
 
@@ -25,6 +28,7 @@ typedef struct MeioDeTransporte {
 	int cargaDaBateria;
 	char localizacao[size];
 	int autonomia;
+	int cod[size];
 
 }MeioDeTransporte;
 
@@ -43,11 +47,21 @@ typedef struct Gestor {
 
 }Gestor;
 
-MeioDeTransporte* criaTransporte(char nome[], int custo, int cargaDaBateria, char localizacao[], int autonomia);
+#pragma endregion
+
+MeioDeTransporte* criaTransporte(char nome[], int custo, int cargaDaBateria, char localizacao[], int autonomia, int cod[]);
 Cliente* criaCliente(char nome[], char NIF[], int saldo, char morada[]);
 Gestor* criarGestor(char nome[]);
 
-int* removerCliente(Cliente arr[], int pos);
+bool removerCliente(Cliente* arr[], char NIF[]);
+bool removerGestor(Gestor* arr[], char nome[]);
+bool removerMeioDeTransporte(MeioDeTransporte* arr[],int cod[]);
+
+bool alterarCliente(Cliente* arr[], int parametro, int NIF);
+bool alterarTransporte(MeioDeTransporte* arr[], int parametro, int cod[]);
+
+
+
 
 
 #endif 
