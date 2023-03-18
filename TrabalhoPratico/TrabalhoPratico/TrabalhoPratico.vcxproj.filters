@@ -21,6 +21,9 @@
     <ClCompile Include="Funcoes.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ficheiros.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Funcoes.h">

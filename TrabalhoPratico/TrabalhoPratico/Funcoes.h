@@ -10,6 +10,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #define _CRT_SECURE_NO_WARNINGS
+#pragma warning(disable:4996)
 
 #pragma once
 
@@ -28,7 +29,7 @@ typedef struct MeioDeTransporte {
 	int cargaDaBateria;
 	char localizacao[size];
 	int autonomia;
-	int cod[size];
+	int cod;
 
 }MeioDeTransporte;
 
@@ -47,19 +48,31 @@ typedef struct Gestor {
 
 }Gestor;
 
+typedef struct Registo {
+
+	char NIF;
+	int cod;
+	int tempo;
+	int custo;
+
+}Registo;
+
 #pragma endregion
 
-MeioDeTransporte* criaTransporte(char nome[], int custo, int cargaDaBateria, char localizacao[], int autonomia, int cod[]);
+MeioDeTransporte* criaTransporte(char nome[], int custo, int cargaDaBateria, char localizacao[], int autonomia, int cod);
 Cliente* criaCliente(char nome[], char NIF[], int saldo, char morada[]);
 Gestor* criarGestor(char nome[]);
 
 bool removerCliente(Cliente* arr[], char NIF[]);
 bool removerGestor(Gestor* arr[], char nome[]);
-bool removerMeioDeTransporte(MeioDeTransporte* arr[],int cod[]);
+bool removerMeioDeTransporte(MeioDeTransporte* arr[],int cod);
 
 bool alterarCliente(Cliente* arr[], int parametro, int NIF);
-bool alterarTransporte(MeioDeTransporte* arr[], int parametro, int cod[]);
+bool alterarTransporte(MeioDeTransporte* arr[], int parametro, int cod);
 
+bool LerFicheiroClientesTXT(Cliente* cliente[], char filename[]);
+bool LerFicheiroTransportesTXT(MeioDeTransporte* transporte[], char filename[]);
+bool LerFicheiroAluguerTXT(Registo* aluguer[], char filename[]);
 
 
 

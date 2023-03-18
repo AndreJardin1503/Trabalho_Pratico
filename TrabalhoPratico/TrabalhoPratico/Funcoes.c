@@ -21,7 +21,7 @@
   * \return
   */
 
-MeioDeTransporte* criaTransporte(char nome[], int custo, int cargaDaBateria, char localizacao[], int autonomia, int cod[]) {
+MeioDeTransporte* criaTransporte(char nome[], int custo, int cargaDaBateria, char localizacao[], int autonomia, int cod) {
 
 	MeioDeTransporte* novoTransporte = (MeioDeTransporte*)malloc(sizeof(MeioDeTransporte));
 
@@ -30,7 +30,7 @@ MeioDeTransporte* criaTransporte(char nome[], int custo, int cargaDaBateria, cha
 	novoTransporte->cargaDaBateria = cargaDaBateria;
 	strcpy(novoTransporte->localizacao, localizacao);
 	novoTransporte->autonomia = autonomia;
-	novoTransporte->cod == cod;
+	novoTransporte->cod = cod;
 
 	return novoTransporte;
 }
@@ -144,7 +144,7 @@ bool removerGestor(Gestor* arr[], char nome[])
  * \return
  */
 
-bool removerMeioDeTransporte(MeioDeTransporte* arr[], int cod[])
+bool removerMeioDeTransporte(MeioDeTransporte* arr[], int cod)
 {
 	int i, j;
 
@@ -159,7 +159,7 @@ bool removerMeioDeTransporte(MeioDeTransporte* arr[], int cod[])
 				arr[j]->custo = arr[j + 1]->custo;
 				arr[j]->cargaDaBateria = arr[j + 1]->cargaDaBateria;
 				arr[j]->autonomia = arr[j + 1]->autonomia;
-				arr[j]->cod == arr[j + 1]->cod;
+				arr[j]->cod = arr[j + 1]->cod;
 			}
 
 			return true;
@@ -181,7 +181,6 @@ bool removerMeioDeTransporte(MeioDeTransporte* arr[], int cod[])
 
 
 bool alterarCliente(Cliente* arr[], int parametro, int NIF) {
-
 	int i, j;
 
 	for (i = 0; i < size; i++) {
@@ -229,7 +228,7 @@ bool alterarCliente(Cliente* arr[], int parametro, int NIF) {
 
 bool alterarTransporte(MeioDeTransporte* arr[], int parametro, int cod) {
 
-	int i, j;
+	int i;
 
 	for (i = 0; i < size; i++) {
 
@@ -293,3 +292,74 @@ bool alterarTransporte(MeioDeTransporte* arr[], int parametro, int cod) {
 	return false;
 }
 
+MeioDeTransporte* ListagemAutonomia(MeioDeTransporte transporte[]) {
+
+		
+
+		for (int i = 0; i < size; i++) {
+
+			for (int j = i + 1; j < size; j++) {
+
+				if (transporte[i].autonomia < transporte[j].autonomia) {
+
+					char auxNome[size];
+					char auxLocalizacao[size];
+
+
+					strcpy(auxNome,transporte[j].nome);
+					strcpy(transporte[j].nome, transporte[i].nome);
+					strcpy(transporte[i].nome, auxNome);
+
+					int auxCusto = transporte[j].custo;
+					transporte[j].custo = transporte[i].custo;
+					transporte[i].custo = auxCusto;
+
+					int auxBateria = transporte[j].cargaDaBateria;
+					transporte[j].cargaDaBateria = transporte[i].cargaDaBateria;
+					transporte[i].custo = auxBateria;
+
+					strcpy(auxLocalizacao, transporte[j].localizacao);
+					strcpy(transporte[j].localizacao, transporte[i].localizacao);
+					strcpy(transporte[i].localizacao, auxLocalizacao);
+
+					int auxAutonomia = transporte[j].autonomia;
+					transporte[j].autonomia = transporte[i].autonomia;
+					transporte[i].autonomia = auxAutonomia;
+
+					int auxcod = transporte[j].cod;
+					transporte[j].cod = transporte[i].cod;
+					transporte[i].cod = auxcod;
+
+				}
+			}
+		}
+
+		return transporte;
+
+}
+
+
+MeioDeTransporte* ListagemLocalização(MeioDeTransporte transporte[], char localizacao){
+
+	MeioDeTransporte* novo;
+
+	for (int i = 0; i < size; i++) {
+
+		if (transporte[i].localizacao == localizacao) {
+
+			int j = 0;
+
+			strcpy(novo[j].nome, transporte->nome);
+			novo[j].cargaDaBateria = transporte->cargaDaBateria;
+			novo[j].custo = transporte->custo;
+			strcpy(novo[j].localizacao, transporte->localizacao);
+			novo[j].autonomia = transporte->autonomia;
+			novo[j].cod = transporte->cod;
+
+		}
+
+	}
+
+	return novo;
+
+}
